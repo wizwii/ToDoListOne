@@ -12,9 +12,16 @@ class TodoListViewController : UITableViewController {
     
     var itemArray = ["Read math", "Go to CVS", "See a doctor"]
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //
+        if let items = defaults.array(forKey: "TodoListArray") as? [String]{
+            itemArray = items
+        }
+        
+        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,6 +70,9 @@ class TodoListViewController : UITableViewController {
 // if textField.text! is nil then append whatever inside the "".
 // self.itemArray.append(textField.text! ?? "xxx")
             self.itemArray.append(textField.text!)
+            //to make data persist
+            // (self.itemArray, forKey: "TodoListArray")  == > same as value pair(data in that file), key pair(just like a file name in computer)
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
             self.tableView.reloadData()
             
         
