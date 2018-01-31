@@ -10,15 +10,25 @@ import UIKit
 
 class TodoListViewController : UITableViewController {
     
-    var itemArray = ["Read math", "Go to CVS", "See a doctor"]
+    var itemArray = ["Read math", "Go to CVS", "See a doctor", "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u"]
     
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //
+        print("Before if itemArray has ..... ")
+        print(itemArray)
+        
+        
+
         if let items = defaults.array(forKey: "TodoListArray") as? [String]{
-            itemArray = items
+            print("after if itemArray has .....")
+            print(itemArray)
+            print("after if ===> items has ......")
+            print(items)
+            itemArray.append(contentsOf: items)
+            
         }
         
         
@@ -69,7 +79,10 @@ class TodoListViewController : UITableViewController {
 //        print(self.itemArray.count)
 // if textField.text! is nil then append whatever inside the "".
 // self.itemArray.append(textField.text! ?? "xxx")
+            
             self.itemArray.append(textField.text!)
+            print("After add button press.....")
+            print(self.itemArray)
             //to make data persist
             // (self.itemArray, forKey: "TodoListArray")  == > same as value pair(data in that file), key pair(just like a file name in computer)
             self.defaults.set(self.itemArray, forKey: "TodoListArray")
@@ -90,6 +103,8 @@ class TodoListViewController : UITableViewController {
         present(alert, animated: true, completion: nil)
         
     }
+
+    
     
 }
 
